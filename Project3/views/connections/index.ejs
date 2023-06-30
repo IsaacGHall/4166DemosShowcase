@@ -1,0 +1,29 @@
+<%- include('../partials/header.ejs')%>
+
+    <div id = "content1">           
+        <%if(connections.length){%>         
+            <h2>Select a connection!</h2>
+            
+            <div id = "cardContainer">
+            <%connections.forEach(connection=>{%>
+                <div class="card"> 
+                    <p><%= connection.category%></p>
+                    <a href="">
+                        <img src="public\images\gamepad.png" alt="">
+                    </a>
+                    <a href = "/connections/<%=connection.id%>"><p><%= connection.title%></p></a>
+                    <p>RSVP For This Event:</p>
+                        <form class="display flex3" action="/connections/<%= connection.id%>/rsvp" method="POST">
+                        <button id="button" type="submit" name="state" value="yes">Yes</button>
+                        <button id="button" type="submit" name="state" value="no">No</button>
+                        <button id="button" type="submit" name="state" value="maybe">Maybe</button>
+                    </form>
+                </div>
+                
+            <% });
+        }else {%>
+            <p>There are no connections to display</p>
+        <%}%>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs')%>

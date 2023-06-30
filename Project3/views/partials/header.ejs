@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <link href= "/public/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="wrapper">
+          
+      <div class="header flex">
+          <!-- navigable toolbar that scrolls with the windows. -->
+          <a href="/"><img id="logo" src="/public/images/gamepad.png" alt="logo"/></a>
+          <%if(!user){%>
+            <ul>
+                <li><a class="active" href="/user/login">Login</a></li>
+                <li><a class="active" href="/user/new">Sign Up</a></li>
+            </ul>
+          <%} else {%>
+            <ul>
+                <li><a class="active" href="/user/profile">Profile</a></li>
+                <li><a class="active" href="/user/logout">Logout</a></li> 
+            </ul>
+         <% } %>
+          
+          
+      </div>
+      <div class="navigation">
+          <ul>
+          <li><a href='/'>Home</a></li>
+          <li><a href='../connections'>Connections</a></li>
+         
+          <li><a href='/connections/new'>New Connections</a></li>
+      </ul>
+  </div>
+
+  <% if(errorMessages.length > 0) {%>
+    <% errorMessages.forEach(message=>{%>
+        <div class='error'>
+            <%=message%>
+        </div>
+        <%});%>
+            <%}%>
+
+                <% if(successMessages.length > 0) {%>
+
+                    <% successMessages.forEach(message=>{%>
+                        <div class='success'>
+                            <%=message%>
+                        </div>
+                        <%});%>
+                            <%}%>
+

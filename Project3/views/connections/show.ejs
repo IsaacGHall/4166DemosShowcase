@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs')%>
+
+    <div class = "content">
+       <h4><%= connection.title%></h4>
+       <small>Posted <%= connection.createdAt.toLocaleString()%> by <%= connection.author.firstName + ' ' + connection.author.lastName%> || from <%=connection.location%> || Category: <%=connection.category%> </small>
+       <div id = "connection"><%= connection.content%></div>       
+       <small>Details: <%= connection.details%></small>
+       <small>Updated at: <%= connection.updatedAt%> </small>
+    </div>
+    <%if(user == connection.author._id) {%>
+    <form id = "formContainer">
+        <button type ="submit" class = formButton formmethod = "GET" formaction = "/connections/<%= connection.id%>/edit">Edit</button>
+        <button type ="submit" class = formButton formmethod = "POST" formaction = "/connections/<%= connection.id%>?_method=DELETE">Delete</button>
+    </form>
+    <%}else {%>
+        <p>Click the buttons below to RSVP for this event!</p>
+        <p><%=RSVP.length %> users have RSVP'd!</p>
+        <form class="display flex3" action="/connections/<%= connection.id%>/rsvp" method="POST">
+            <button id="button" type="submit" name="state" value="yes">Yes</button>
+            <button id="button" type="submit" name="state" value="no">No</button>
+            <button id="button" type="submit" name="state" value="maybe">Maybe</button>
+        </form>
+        <%}%>
+</div>
+    
+    <%- include('../partials/footer.ejs')%>
